@@ -1,0 +1,26 @@
+{
+  "name": "@atlas/api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "lint": "echo lint pending",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
+    "test": "pnpm run test:contract",
+    "test:contract": "node --import tsx --test test/agent-tools.test.ts test/orchestrator-tool.test.ts test/orchestrator-edit-preview.test.ts test/agent-session-persistence.test.ts test/agent-state-http.test.ts test/agent-tools-http.test.ts test/agent-edit-preview-http.test.ts test/chat-post-messages.degraded.test.ts",
+    "test:smoke": "node --import tsx --test test/chat-post-messages.smoke.test.ts"
+  },
+  "dependencies": {
+    "@atlas/db": "workspace:*",
+    "@atlas/types": "workspace:*",
+    "dotenv": "^17.3.1",
+    "fastify": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}

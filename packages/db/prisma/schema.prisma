@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model HealthCheck {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+}
+
+model ChatSession {
+  id            String        @id @default(cuid())
+  title         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  lastMessageAt DateTime      @default(now())
+  /// JSON de `AgentSessionState` (TEXT; SQLite sin tipo Json en este schema).
+  agentState    String?
+  messages      ChatMessage[]
+
+  @@index([lastMessageAt])
+}
+
+model ChatMessage {
+  id        String          @id @default(cuid())
+  sessionId String
+  role      String
+  content   String
+  createdAt DateTime        @default(now())
+  session   ChatSession     @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([sessionId, createdAt])
+}

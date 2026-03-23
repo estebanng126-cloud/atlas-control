@@ -1,0 +1,89 @@
+const base = {
+  width: 20,
+  height: 20,
+  viewBox: "0 0 24 24" as const,
+  fill: "none" as const,
+  xmlns: "http://www.w3.org/2000/svg" as const,
+};
+
+const stroke = {
+  stroke: "currentColor",
+  strokeWidth: 1.5,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+/** Catálogo de producto `apps/web/src/features/sidebar`: ítem Dashboard. */
+export function IconSidebarDashboard() {
+  return (
+    <svg {...base} aria-hidden>
+      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" {...stroke} />
+      <path d="M9 22V12h6v10" {...stroke} />
+    </svg>
+  );
+}
+
+/** Catálogo de producto: ítem Workbench (misma geometría que IconSidebarNav6). */
+export function IconSidebarWorkbench() {
+  return (
+    <svg {...base} aria-hidden>
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" {...stroke} />
+    </svg>
+  );
+}
+
+export function IconSidebarNav1() {
+  return (
+    <svg {...base} aria-hidden>
+      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" {...stroke} />
+      <path d="M9 22V12h6v10" {...stroke} />
+    </svg>
+  );
+}
+
+export function IconSidebarNav2() {
+  return (
+    <svg {...base} aria-hidden>
+      <rect x="3" y="3" width="7" height="7" rx="1" {...stroke} />
+      <rect x="14" y="3" width="7" height="7" rx="1" {...stroke} />
+      <rect x="14" y="14" width="7" height="7" rx="1" {...stroke} />
+      <rect x="3" y="14" width="7" height="7" rx="1" {...stroke} />
+    </svg>
+  );
+}
+
+export function IconSidebarNav3() {
+  return (
+    <svg {...base} aria-hidden>
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" {...stroke} />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" {...stroke} />
+    </svg>
+  );
+}
+
+export function IconSidebarNav4() {
+  return (
+    <svg {...base} aria-hidden>
+      <path d="M12 4a7 7 0 1 0 10 10" {...stroke} />
+      <path d="M12 8a3 3 0 1 0 6 6" {...stroke} />
+    </svg>
+  );
+}
+
+export function IconSidebarNav5() {
+  return (
+    <svg {...base} aria-hidden>
+      <circle cx="9" cy="21" r="1" fill="currentColor" stroke="none" />
+      <circle cx="20" cy="21" r="1" fill="currentColor" stroke="none" />
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" {...stroke} />
+    </svg>
+  );
+}
+
+export function IconSidebarNav6() {
+  return (
+    <svg {...base} aria-hidden>
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" {...stroke} />
+    </svg>
+  );
+}

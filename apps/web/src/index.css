@@ -1,0 +1,176 @@
+:root {
+  /* ── Typography ── */
+  --font-family-base: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --font-family-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --line-height-tight: 1.25;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.6;
+
+  /* Semantic type aliases */
+  --text-label-size: var(--font-size-sm);
+  --text-body-size: var(--font-size-base);
+  --text-title-size: var(--font-size-md);
+
+  font-family: var(--font-family-base);
+
+  /* ── Semantic text colors ── */
+  --text-primary: rgb(255 255 255 / 92%);
+  --text-secondary: rgb(255 255 255 / 72%);
+  --text-muted: rgb(255 255 255 / 50%);
+  --text-disabled: rgb(255 255 255 / 32%);
+
+  /* ── Spacing tokens ── */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 16px;
+
+  /* Common aliases for compact controls */
+  --space-control-y: var(--space-2);
+  --space-control-x: var(--space-3);
+
+  /* Base control size tokens */
+  --control-size: 28px;
+  --control-height: var(--control-size);
+
+  /* Gap aliases */
+  --gap-sm: var(--space-2);
+  --gap-base: var(--space-5);
+  --gap-md: var(--space-3);
+  --gap-lg: var(--space-6);
+
+  /* Base inset/padding around containers */
+  --inset-base: var(--space-5);
+
+  /* ── Radius ── */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+
+  /* ── Surfaces ── */
+  --surface-bg: #f7f7f7;
+
+  /*
+   * Lienzo principal (detrás de sidebar / columnas): superficie ambiental oscura.
+   * Más suave que --base-panel-bg-gradient-* (sin competir con paneles ni nav).
+   */
+  --main-ambient-mid: #1a1b1e;
+  --main-ambient-top: color-mix(
+    in srgb,
+    color-mix(in srgb, var(--main-ambient-mid), white 1.6%),
+    rgb(72 88 108) 2%
+  );
+  --main-ambient-bottom: color-mix(in srgb, var(--main-ambient-mid), black 3.8%);
+  --main-ambient-surface: linear-gradient(
+    180deg,
+    var(--main-ambient-top) 0%,
+    var(--main-ambient-mid) 44%,
+    var(--main-ambient-bottom) 100%
+  );
+
+  /* BasePanel (dark shell) */
+  --base-panel-bg: #25282c;
+  /* Gradiente muy suave (menos marcado que IconButton); mantiene --base-panel-bg como referencia */
+  --base-panel-bg-gradient-start: color-mix(in srgb, var(--base-panel-bg), white 3.5%);
+  --base-panel-bg-gradient-end: color-mix(in srgb, var(--base-panel-bg), black 4.5%);
+  --base-panel-inset-highlight-shadow: inset 0 1px 0 rgb(255 255 255 / 6%);
+  --base-panel-text: var(--text-primary);
+  --base-panel-shadow: 0 2px 14px rgb(0 0 0 / 35%);
+  /* Single source of truth for UI borders */
+  --border-color: #6b7584;
+  --base-panel-border: var(--border-color);
+  /* Dividers / inputs / buttons inside BasePanel */
+  --base-panel-stroke: var(--border-color);
+
+  /* Shared panel shadow token (legacy alias → BasePanel dark) */
+  --panel-shadow: var(--base-panel-shadow);
+
+  /* Subtle panel border (on dark BasePanel) */
+  --panel-border-color: var(--border-color);
+
+  /* Search (píldora): mismo borde que BasePanel (`--panel-border-color`); fondo más oscuro que el panel */
+  --search-field-bg: color-mix(in srgb, var(--base-panel-bg), black 11%);
+  --search-field-placeholder: rgb(255 255 255 / 45%);
+  --search-field-icon: rgb(255 255 255 / 75%);
+  --search-pill-radius: 9999px;
+
+  /* IconButton (toolbar / paneles; estilo premium oscuro) */
+  --icon-button-border: rgb(107 117 132 / 48%);
+  --icon-button-border-hover: rgb(107 117 132 / 78%);
+  --icon-button-bg-top: rgb(255 255 255 / 9%);
+  --icon-button-bg-bottom: rgb(255 255 255 / 3%);
+  --icon-button-bg-hover-top: rgb(255 255 255 / 14%);
+  --icon-button-bg-hover-bottom: rgb(255 255 255 / 5%);
+  --icon-button-inset-highlight: rgb(255 255 255 / 11%);
+  --icon-button-shadow: 0 1px 2px rgb(0 0 0 / 28%);
+  --icon-button-icon-color: rgb(255 255 255 / 93%);
+
+  /* Shared button DNA (base only, no hierarchy) */
+  --button-base-font-size: var(--font-size-base);
+  --button-base-font-weight: var(--font-weight-medium);
+  --button-base-radius: var(--radius-sm);
+  --button-base-border-width: 1px;
+  --button-base-border-color: var(--icon-button-border);
+  --button-base-border-hover: var(--icon-button-border-hover);
+  --button-base-icon-size: 15px;
+  --button-base-focus-ring: rgb(120 160 255 / 55%);
+  --button-base-focus-offset: 2px;
+  --button-base-disabled-opacity: 0.45;
+  --button-base-active-translate-y: 0.5px;
+  --button-base-transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 90ms ease;
+
+  /* Composer controls: compact and secondary */
+  --composer-control-height: 26px;
+  --composer-control-radius: 999px;
+  --composer-control-border: rgb(255 255 255 / 10%);
+  --composer-control-border-hover: rgb(255 255 255 / 15%);
+  --composer-control-bg: rgb(255 255 255 / 4%);
+  --composer-control-bg-hover: rgb(255 255 255 / 6%);
+  --composer-control-bg-active: rgb(255 255 255 / 8%);
+  --composer-control-text: rgb(255 255 255 / 88%);
+  --composer-control-text-strong: rgb(255 255 255 / 94%);
+
+  /* Primary send button */
+  --primary-send-height: 28px;
+  --primary-send-border: rgb(128 154 255 / 42%);
+  --primary-send-border-hover: rgb(145 170 255 / 58%);
+  --primary-send-bg-top: rgb(118 145 255 / 30%);
+  --primary-send-bg-bottom: rgb(72 95 190 / 26%);
+  --primary-send-bg-hover-top: rgb(130 158 255 / 36%);
+  --primary-send-bg-hover-bottom: rgb(84 108 208 / 30%);
+  --primary-send-text: rgb(246 249 255 / 97%);
+  --primary-send-shadow: 0 1px 3px rgb(0 0 0 / 26%);
+
+  /* Sidebar nav — chip base bajo gradientes overlay (microajuste premium, ver main-screen.css) */
+  --sidebar-nav-chip-base: #67696c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*
+ * App shell: full-viewport layout lives in main-screen.css (html/body/#root height + flex).
+ * Do NOT use display:grid + place-items:center here — it shrink-wraps #root and breaks the UI.
+ */
+body {
+  margin: 0;
+  min-height: 100vh;
+}
