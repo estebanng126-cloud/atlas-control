@@ -1,9 +1,12 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export type FileTabItem<T extends string = string> = {
   id: T;
   label: string;
   icon?: ReactNode;
+  disabled?: boolean;
+  /** Deshabilita el tab y muestra el spinner compartido; solo usar con carga real. */
+  loading?: boolean;
 };
 
 export type FileTabBarProps<T extends string> = {
@@ -13,56 +16,6 @@ export type FileTabBarProps<T extends string> = {
   onClose?: (id: T) => void;
 };
 
-const barStyle: CSSProperties = {
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "stretch",
-  minHeight: 0,
-  overflowX: "auto",
-};
-
-const tabStyle: CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: "var(--gap-sm)",
-  padding: "var(--screen-header-padding-y) var(--screen-header-padding-x)",
-  fontSize: "var(--screen-header-font-size)",
-  fontWeight: "var(--font-weight-normal)",
-  lineHeight: "var(--line-height-tight)",
-  color: "var(--text-muted)",
-  background: "transparent",
-  border: "none",
-  borderRight: "0.5px solid var(--screen-border)",
-  cursor: "pointer",
-  whiteSpace: "nowrap",
-  transition: "color 120ms ease, background 120ms ease",
-};
-
-const tabActiveStyle: CSSProperties = {
-  ...tabStyle,
-  color: "var(--text-primary)",
-  fontWeight: "var(--font-weight-medium)",
-  background: "rgb(255 255 255 / 4%)",
-};
-
-const closeStyle: CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: 16,
-  height: 16,
-  padding: 0,
-  margin: 0,
-  fontSize: 12,
-  lineHeight: 1,
-  color: "inherit",
-  opacity: 0.5,
-  background: "transparent",
-  border: "none",
-  borderRadius: 3,
-  cursor: "pointer",
-};
-
 export function FileTabBar<T extends string>({
   items,
   activeId,
@@ -70,32 +23,62 @@ export function FileTabBar<T extends string>({
   onClose,
 }: FileTabBarProps<T>) {
   return (
-    <div style={barStyle} role="tablist">
+    <div className="file-tab-bar" role="tablist">
       {items.map((item) => {
         const isActive = item.id === activeId;
-        return (
-          <div
-            key={item.id}
+        const isBusy = item.loading === true;
+        const isDisabled = item.disabled === true || isBusy;
+
+        const tabClass = [
+          "file-tab",
+          isActive && "file-tab--active",
+          isBusy && "file-tab--loading",
+        ]
+          .filter(Boolean)
+          .join(" ");
+
+        const tabButton = (
+          <button
+            type="button"
             role="tab"
             aria-selected={isActive}
-            style={isActive ? tabActiveStyle : tabStyle}
-            onClick={() => onSelect(item.id)}
+            aria-busy={isBusy || undefined}
+            disabled={isDisabled}
+            className={tabClass}
+            onClick={() => {
+              if (!isDisabled) onSelect(item.id);
+            }}
           >
+            {isBusy ? <span className="atlas-inline-spinner" aria-hidden /> : null}
             {item.icon ?? null}
-            <span>{item.label}</span>
-            {onClose ? (
-              <button
-                type="button"
-                style={closeStyle}
-                aria-label={`Close ${item.label}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onClose(item.id);
-                }}
-              >
-                ×
-              </button>
-            ) : null}
+            <span className="file-tab__label">{item.label}</span>
+          </button>
+        );
+
+        if (!onClose) {
+          return (
+            <div key={item.id} className="file-tab-bar__pair" role="presentation">
+              {tabButton}
+            </div>
+          );
+        }
+
+        return (
+          <div key={item.id} className="file-tab-bar__pair" role="presentation">
+            {tabButton}
+            <button
+              type="button"
+              className="file-tab__close"
+              aria-label={`Close ${item.label}`}
+              disabled={isDisabled}
+              onClick={(e) => {
+                e.preventDefault();
+                if (isDisabled) return;
+                onClose(item.id);
+              }}
+            >
+              ×
+            </button>
           </div>
         );
       })}
