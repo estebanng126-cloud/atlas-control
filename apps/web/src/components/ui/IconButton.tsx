@@ -2,11 +2,17 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 /**
  * Tamaño y trazo recomendados para iconos Lucide dentro de `IconButton`
- * (compacto, alineado con `--control-size`).
+ * (compacto, alineado con `--control-size` y el estilo por defecto del botón).
  */
 export const iconButtonLucideDefaults = {
   size: 15,
   strokeWidth: 1.25,
+} as const;
+
+/** Con `className="icon-button--chrome"`: alinear con `--chrome-icon-size` / `--chrome-icon-stroke-width`. */
+export const iconButtonChromeLucideDefaults = {
+  size: 16,
+  strokeWidth: 1.5,
 } as const;
 
 export type IconButtonShape = "rounded" | "square";
@@ -24,7 +30,7 @@ export type IconButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "chi
 };
 
 /**
- * Botón solo icono, tamaño fijo `--control-size`. Reutilizable en toolbars, paneles, listas, etc.
+ * Botón solo icono: por defecto `--control-size`; con `.icon-button--chrome` usa `--chrome-icon-button-size`.
  */
 export function IconButton({
   icon,
